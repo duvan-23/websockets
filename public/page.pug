@@ -1,0 +1,25 @@
+doctype
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		style
+			include style.css
+		link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'
+    integrity='sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l' crossorigin='anonymous')
+		<script src="/socket.io/socket.io.js"></script>
+		
+		title= "Node chat"
+	body
+		div.container-fluid.mt-3
+			h1(style="color:blue;")!="Ingrese Productos Pug"
+			br
+			hr
+			form.form-inline(onsubmit='return addMessage(this)' autocomplete='off')
+				input.form-control.my-2.mr-2(type="text" id="username" placeholder="Tu Nombre")
+				input.form-control.my-2.mr-2(type="text" id="text" placeholder="Cuéntanos algo...")
+				input.btn.btn-primary.my-2(type="submit" value="Enviar!")
+			div#messages
+		script(src='main.js')
+
+
