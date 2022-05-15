@@ -2,10 +2,10 @@ extends inicio
 
 block formulario   
     div.container.mt-3
-        .jumbotron
-            h1(style="color:blue;")!="Ingrese Productos Pug"
+        div.jumbotron
+            h1(style="color:blue;")!="Ingrese Productos"
             br
-            form(onsubmit='return addMessage(this)' autocomplete='off')
+            form( autocomplete='off')
                 div.form-group
                     label(for="nombre") Nombre: 
                     input#nombre.form-control(type='text', placeholder='nombre' name='nombre')
@@ -15,5 +15,5 @@ block formulario
                 div.form-group
                     label(for="foto") Foto Url: 
                     input#foto.form-control(type='text', placeholder='https://cdn2.iconfinder.com/data/icons/leto-blue-big-data/64/big_data-30-128.png' name='foto')
-                button.btn.btn-success.mt-3.mb-5(type="submit", name="enviar") Guardar Producto
-            div#messages
+                button.btn.btn-success.mt-3.mb-5(type="button", name="enviar") Guardar Producto
+            div#products

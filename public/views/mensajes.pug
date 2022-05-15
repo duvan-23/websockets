@@ -1,0 +1,17 @@
+extends formulario 
+
+block mensajes
+    div.container.mt-3
+        div.jumbotron
+            div.row
+                div.col-md-6.offset-md-3
+                    h1.text-center(style="color:blue;")!="Centro de Mensajes"
+                    br
+                    form.form( autocomplete='off')
+                        input.form-control.my-2.mr-2(type="email" id="email" placeholder="juan@hotmail.com" required)
+                        br
+                        di.input-group.mb-3
+                            input.form-control.my-2.mr-2(type="text" id="text" placeholder="Cuéntanos algo..." required)
+                            div.input-group-prepend
+                                input#envioMensaje.btn.btn-primary.my-2(type="button" value="Enviar!")
+                    div#messages
