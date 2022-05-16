@@ -3,9 +3,13 @@ const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
 
 const app = express()
+const proyecto = require('./archivo.js');
+const fs =require('fs');
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
 
+let contenedorProductos = new proyecto.Contenedor("productos.txt");
+let contenedorMensajes = new proyecto.Contenedor("mensajes.txt");
 const messages = [];
 const productos = [];
 
@@ -19,22 +23,24 @@ app.get('/', (req, res) => {
     res.render('./views/mensajes')
 })
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
     console.log('Un cliente se ha conectado!')
 
-    socket.emit('messages', messages)
+    // socket.emit('messages', messages)
+    socket.emit('messages', await contenedorMensajes.getAll())
 
-    socket.on('new-message', data => {
-        messages.push(data)
-
-        io.sockets.emit('messages', messages)
+    socket.on('new-message', async data => {
+        // messages.push(data)
+        await contenedorMensajes.save(data);
+        io.sockets.emit('messages', await contenedorMensajes.getAll())
     })
-    socket.emit('products', productos)
+    // socket.emit('products', productos)
+    socket.emit('products', await contenedorProductos.getAll())
 
-    socket.on('new-product', data => {
-        productos.push(data)
-
-        io.sockets.emit('products', productos)
+    socket.on('new-product', async data => {
+        // productos.push(data)
+        await contenedorProductos.save(data);
+        io.sockets.emit('products', await contenedorProductos.getAll())
     })
 })
 

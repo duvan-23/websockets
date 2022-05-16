@@ -1,11 +1,11 @@
 const socket = io.connect();
 
-document.querySelector('button').addEventListener('click', () => {
-    addProducto();
-});
-document.getElementById("envioMensaje").addEventListener('click', () => {
-    addMessage();
-});
+// document.querySelector('button').addEventListener('click', () => {
+//     addProducto();
+// });
+// document.getElementById("envioMensaje").addEventListener('click', () => {
+//     addMessage();
+// });
 
 function addProducto() {
 
@@ -65,16 +65,17 @@ function renderProductos(data) {
     document.getElementById("products").innerHTML = html_titulo+html1+html+html2;
 }
 function renderMensajes(data) {
-    
-    const html = data.map((elem, index) => {
-        
-        return(`<div>
-        <strong class="text-primary">${elem.author}</strong>  <span style="color:#6F4E37">[${elem.fecha}] :</span>
-        <em class="text-success font-italic">${elem.message}</em>
-        </div>`)
-    }).join(" ")
-
-    document.getElementById("messages").innerHTML = html
+    let html='<h3 class="alert alert-warning">No hay Mensajes</h3>';
+    if(data.length > 0) {
+        html = data.map((elem, index) => {
+            
+            return(`<div>
+            <strong class="text-primary">${elem.author}</strong>  <span style="color:#6F4E37">[${elem.fecha}] :</span>
+            <em class="text-success font-italic">${elem.message}</em>
+            </div>`)
+        }).join(" ")
+    }
+    document.getElementById("messages").innerHTML = html;
 }
 socket.on("products", function(data) {renderProductos(data)})
 socket.on("messages", function(data) {renderMensajes(data)})
